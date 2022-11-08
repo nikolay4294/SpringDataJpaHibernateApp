@@ -7,8 +7,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.vorobiev.springApp.models.Book;
 import ru.vorobiev.springApp.models.Person;
-import ru.vorobiev.springApp.services.BookService;
-import ru.vorobiev.springApp.services.PeopleService;
+import ru.vorobiev.springApp.services.BookRepositoriesImpl;
+import ru.vorobiev.springApp.services.PeopleRepositoriesImpl;
 
 import javax.validation.Valid;
 
@@ -16,11 +16,11 @@ import javax.validation.Valid;
 @RequestMapping("/books")
 public class BooksController {
 
-    private final BookService bookService;
-    private final PeopleService peopleService;
+    private final BookRepositoriesImpl bookService;
+    private final PeopleRepositoriesImpl peopleService;
 
     @Autowired
-    public BooksController(BookService bookService, PeopleService peopleService) {
+    public BooksController(BookRepositoriesImpl bookService, PeopleRepositoriesImpl peopleService) {
         this.bookService = bookService;
         this.peopleService = peopleService;
     }
@@ -33,7 +33,7 @@ public class BooksController {
             model.addAttribute("books", bookService.findAll(sortByYear)); //выдача всех книг
         else
             model.addAttribute("books", bookService.findWithPagination(page, booksPerPage, sortByYear));
-        return "books/index";
+        return "book/index";
     }
 
     @GetMapping("/{id}")
@@ -46,19 +46,19 @@ public class BooksController {
             model.addAttribute("owner", bookOwner);
         else
             model.addAttribute("people", peopleService.findAll());
-        return "books/show";
+        return "book/show";
     }
 
     @GetMapping("/new")
     public String newBook(@ModelAttribute("book") Book book) {
-        return "books/new";
+        return "book/new";
     }
 
     @PostMapping()
     public String create(@ModelAttribute("book") @Valid Book book,
                          BindingResult bindingResult) {
         if (bindingResult.hasErrors())
-            return "books/new";
+            return "book/new";
 
         bookService.save(book);
         return "redirect:/books";
@@ -67,14 +67,14 @@ public class BooksController {
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) {
         model.addAttribute("book", bookService.findOne(id));
-        return "books/edit";
+        return "book/edit";
     }
 
     @PatchMapping("/{id}")
     public String update(BindingResult bindingResult, @PathVariable("id") int id,
                          @ModelAttribute("book") @Valid Book updatedBook) {
         if (bindingResult.hasErrors())
-            return "books/edit";
+            return "book/edit";
 
         bookService.update(id, updatedBook);
         return "redirect:/books";
@@ -100,6 +100,6 @@ public class BooksController {
 
     public String makeSearch(Model model, @RequestParam("query") String query) {
         model.addAttribute("books", bookService.searchByTitle(query));
-        return "books/search";
+        return "book/search";
     }
 }

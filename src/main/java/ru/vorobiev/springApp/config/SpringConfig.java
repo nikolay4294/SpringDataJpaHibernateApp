@@ -24,7 +24,7 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-@ComponentScan("ru.vorobiev.springApp")
+@ComponentScan(basePackages = {"ru.vorobiev.springApp"})
 @Configuration
 @PropertySource("classpath:hibernate.properties")
 @EnableTransactionManagement

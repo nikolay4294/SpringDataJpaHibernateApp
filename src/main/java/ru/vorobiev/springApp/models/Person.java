@@ -37,6 +37,13 @@ public class Person {
         this.yearOfBirth = yearOfBirth;
     }
 
+    public Person(int id, String fio, int yearOfBirth, List<Book> books) {
+        this.id = id;
+        this.fio = fio;
+        this.yearOfBirth = yearOfBirth;
+        this.books = books;
+    }
+
     public int getId() {
         return id;
     }

@@ -5,9 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import ru.vorobiev.springApp.PersonValidator;
+import ru.vorobiev.springApp.util.PersonValidator;
 import ru.vorobiev.springApp.models.Person;
-import ru.vorobiev.springApp.services.PeopleService;
+import ru.vorobiev.springApp.services.PeopleRepositoriesImpl;
 
 import javax.validation.Valid;
 
@@ -15,11 +15,11 @@ import javax.validation.Valid;
 @RequestMapping("/people")
 public class PeopleController {
 
-    private final PeopleService peopleService;
+    private final PeopleRepositoriesImpl peopleService;
     private final PersonValidator personValidator;
 
     @Autowired
-    public PeopleController(PeopleService peopleService, PersonValidator personValidator) {
+    public PeopleController(PeopleRepositoriesImpl peopleService, PersonValidator personValidator) {
         this.peopleService = peopleService;
         this.personValidator = personValidator;
     }

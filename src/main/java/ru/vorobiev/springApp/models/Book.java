@@ -53,6 +53,16 @@ public class Book {
         this.yearOfWriting = yearOfWriting;
     }
 
+    public Book(int id, String name, String author, int yearOfWriting, Person owner, Date takenAt, boolean expired) {
+        this.id = id;
+        this.name = name;
+        this.author = author;
+        this.yearOfWriting = yearOfWriting;
+        this.owner = owner;
+        this.takenAt = takenAt;
+        this.expired = expired;
+    }
+
     public int getId() {
         return id;
     }

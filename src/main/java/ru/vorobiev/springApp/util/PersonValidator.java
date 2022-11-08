@@ -1,17 +1,17 @@
-package ru.vorobiev.springApp;
+package ru.vorobiev.springApp.util;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import ru.vorobiev.springApp.models.Person;
-import ru.vorobiev.springApp.services.PeopleService;
+import ru.vorobiev.springApp.services.PeopleRepositoriesImpl;
 
 @Component
 public class PersonValidator implements Validator {
 
-    private final PeopleService peopleService;
+    private final PeopleRepositoriesImpl peopleService;
 
-    public PersonValidator(PeopleService peopleService) {
+    public PersonValidator(PeopleRepositoriesImpl peopleService) {
         this.peopleService = peopleService;
     }
 

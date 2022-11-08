@@ -15,12 +15,12 @@ import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
-public class BookService {
+public class BookRepositoriesImpl {
 
     private final BookRepositories booksRepositories;
 
     @Autowired
-    public BookService(BookRepositories booksRepositories) {
+    public BookRepositoriesImpl(BookRepositories booksRepositories) {
         this.booksRepositories = booksRepositories;
     }
 
